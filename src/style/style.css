@@ -1,0 +1,17 @@
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-size: var(--font-size);
+	font-family: var(--font-family);
+}
+
+#app {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgb(113, 189, 113);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+	gap: 20px;
+}
