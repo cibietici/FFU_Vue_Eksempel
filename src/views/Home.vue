@@ -2,7 +2,7 @@
 	<h1>{{ title }}</h1>
 	<img :src="image">
 	<span>{{ name }}</span>
-	<button v-on:click="fetchNew">Get new</button>
+	<button @click="fetchNew">Get new</button>
 </template>
 
 <script>
@@ -49,4 +49,3 @@ img {
 	border: 3px solid #000;
 }
 </style>
-
