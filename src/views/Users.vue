@@ -23,7 +23,17 @@ export default {
             title: 'Users list',
             nameValue: '',
             people: [],
-            personEmail: ''
+            personEmail: '',
+            clientID: import.meta.env.VITE_CLIENT_ID,
+            data: {},
+            obj: {
+                title: 'title',
+                articles: [
+                    {tit: 1, body: 'bod1'},
+                    {tit: 2, body: 'bod2'},
+                    {tit: 3, body: 'bod3'},
+                ]
+            }
         }
     },
     created() {
@@ -33,9 +43,19 @@ export default {
     methods: {
         async fetchData() {
             const url = 'https://randomuser.me/api/?page=2&results=20';
-            const res = await fetch(url);
+            const options = {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                //body: JSON.stringify(this.data) // bare hvis method er POST
+            };
+            const res = await fetch(url, options);
             const { results } = await res.json();
             this.people = results;
+            console.log(this.clientID);
         },
         findPerson() {
             const person = this.people.find(user => {
