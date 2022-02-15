@@ -24,7 +24,6 @@ export default {
             nameValue: '',
             people: [],
             personEmail: '',
-            clientID: import.meta.env.VITE_CLIENT_ID,
             data: {},
             obj: {
                 title: 'title',
@@ -50,12 +49,12 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                //body: JSON.stringify(this.data) // bare hvis method er POST
+                //body: JSON.stringify(this.data) 
             };
             const res = await fetch(url, options);
             const { results } = await res.json();
             this.people = results;
-            console.log(this.clientID);
+            console.log(import.meta.env.VITE_CLIENT_ID);
         },
         findPerson() {
             const person = this.people.find(user => {
