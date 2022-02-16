@@ -1,14 +1,22 @@
 <template>
+	<Header title="my home" list="34" />
 	<h1>{{ title }}</h1>
 	<img :src="image">
 	<span>{{ name }}</span>
 	<button @click="fetchNew">Get new</button>
+	<Footer />
 </template>
 
 <script>
+import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
 	name: 'home',
+	components: {
+		Header,
+		Footer
+	},
 	data() {
 		return {
 			title: 'Random user',
@@ -26,7 +34,6 @@ export default {
 			const url = 'https://randomuser.me/api/';
 			const res = await fetch(url);
 			const { results }   = await res.json();
-			console.log(results);
 			this.name = `${results[0].name.first} ${results[0].name.last}`;
 			this.image = results[0].picture.large
 		}

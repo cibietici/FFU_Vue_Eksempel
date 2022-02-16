@@ -1,4 +1,5 @@
 <template>
+    <Header title="users" list="20" />
     <h1>{{ title }}</h1>
     <input type="text" v-model="nameValue">
     <span>{{ nameValue }}</span>
@@ -15,9 +16,13 @@
 </template>
 
 <script>
+import Header from '../components/Header.vue';
 
 export default {
     name: 'users',
+    components: {
+        Header
+    },
     data() {
         return {
             title: 'Users list',
@@ -42,19 +47,21 @@ export default {
     methods: {
         async fetchData() {
             const url = 'https://randomuser.me/api/?page=2&results=20';
-            const options = {
-                method: 'GET',
-                mode: 'cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                //body: JSON.stringify(this.data) 
-            };
-            const res = await fetch(url, options);
-            const { results } = await res.json();
+            const response = await fetch(url);
+            const { results, info } = await response.json();
+            console.log(info);
+
             this.people = results;
-            console.log(import.meta.env.VITE_CLIENT_ID);
+
+            const client_id_key = import.meta.env.VITE_UNPLASH_ACCES_KEY;
+
+            console.log(client_id_key)
+
+            /*const unsplashApi = `https://api.unsplash.com/photos/random?client_id=${client_id_key}`
+            const responseUnsplash = await fetch(unsplashApi);
+            const  { urls }  = await responseUnsplash.json();
+
+            console.log(urls.regular) */
         },
         findPerson() {
             const person = this.people.find(user => {
