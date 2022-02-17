@@ -30,7 +30,7 @@ export default {
             people: [],
             personEmail: '',
             data: {},
-            obj: {
+            articles: { // Vi kan ha objekter også
                 title: 'title',
                 articles: [
                     {tit: 1, body: 'bod1'},
@@ -48,20 +48,25 @@ export default {
         async fetchData() {
             const url = 'https://randomuser.me/api/?page=2&results=20';
             const response = await fetch(url);
+            // vi kan deconstruct hele objekt response inn i de to objekter returnert
+            // JS sørge på at både results og info er to variabler vi kan bruke 
             const { results, info } = await response.json();
             console.log(info);
 
             this.people = results;
-
+            
+            // vi sjekker her om enviromental variabler er lastet inn korrekt fra .env filer
             const client_id_key = import.meta.env.VITE_UNPLASH_ACCES_KEY;
-
             console.log(client_id_key)
 
-            /*const unsplashApi = `https://api.unsplash.com/photos/random?client_id=${client_id_key}`
+            /*
+            const unsplashApi = `https://api.unsplash.com/photos/random?client_id=${client_id_key}`
             const responseUnsplash = await fetch(unsplashApi);
+            // decunstruct urls verdi i objekten fra http response
             const  { urls }  = await responseUnsplash.json();
 
-            console.log(urls.regular) */
+            console.log(urls.regular) 
+            */
         },
         findPerson() {
             const person = this.people.find(user => {
@@ -83,6 +88,7 @@ export default {
             });
             this.people = sortedData;
         },
+        // reduce eksempel
         sumThis() {
             const numbers = [1, 4, 6, 9];
             const sum = numbers.reduce((result, numb) => {
